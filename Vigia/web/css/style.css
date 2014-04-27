@@ -1,0 +1,59 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 26-mar-2014, 14:20:23
+    Author     : hsendoa
+*/
+.pic
+{
+     margin-top:0px; 
+     width:120px;
+     margin-left:0px;
+     margin-bottom:0px;
+}
+
+.panel
+{
+    background-image:url("http://autoimagesize.com/wp-content/uploads/2014/01/rainbow-aurora-background-wallpaper-colour-images-rainbow-background.jpg"); 
+}
+
+.name
+{
+    position:absolute;
+    padding-left:200px;
+    font-size:30px;
+}
+
+.dropdown-menu
+{
+    left: inherit;
+}
+
+.change
+{
+ position:absolute; 
+ bottom:20px;
+ padding:1px;
+ color:white;
+ text-decoration:none;
+}
+
+
+.change:hover
+{
+ text-decoration:none;
+ background-color:black;
+ color:white;
+}
+.footer{
+    position: relative;
+    
+    /* altura en px del footer con valor negativo */ 
+    height: 50px; /* Altura del Footer en px*/ 
+    clear: both; 
+    text-align: center; 
+    
+}
