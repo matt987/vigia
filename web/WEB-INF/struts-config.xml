@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_3.dtd">
+
+<!-- vigia app -->
+<struts-config>
+    <form-beans>
+        
+        <form-bean name="MarcasActionFormBean" type="com.vigia.struts.MarcasActionFormBean"/>
+        <form-bean name="UsuariosActionFormBean" type="com.vigia.struts.usuarios.UsuariosActionFormBean"/>
+        <form-bean name="MarcasActionFormBean" type="com.vigia.struts.MarcasActionFormBean"/>
+        <form-bean name="LoginActionFormBean" type="com.vigia.struts.LoginActionFormBean"/>
+        <form-bean name="ClientesActionFormBean" type="com.vigia.struts.clientes.ClientesActionFormBean"/>
+        <form-bean name="EmpleadosActionFormBean" type="com.vigia.struts.empleados.EmpleadosActionFormBean"/>
+        <form-bean name="ProveedoresActionFormBean" type="com.vigia.struts.proveedores.ProveedoresActionFormBean"/>        
+        <form-bean name="RemitosActionFormBean" type="com.vigia.struts.remitos.RemitosActionFormBean"/>
+    
+    </form-beans>
+    
+    <global-exceptions>
+    
+    </global-exceptions>
+
+    <global-forwards>
+        <forward name="logout" path="/Logout.do"/>
+        <forward name="welcome"  path="/Welcome.do"/>
+        <forward name="user"  path="/User.do"/>
+        <forward name="login"  path="/login.do"/>
+        <forward name="usuarios"  path="/Usuarios.do"/>
+        <forward name="marcas"  path="/Marcas.do"/>
+        <forward name="clientes"  path="/Clientes.do" />
+        <forward name="empleados"  path="/Empleados.do" />
+        <forward name="proveedores"  path="/Proveedores.do" />  
+        <forward name="remitos"  path="/Remitos.do" />  
+    </global-forwards>
+
+    <action-mappings>
+        <action input="/" name="LoginActionFormBean" path="/login" scope="session" type="com.vigia.struts.LoginAction" validate="false">
+            <forward name="success" path="/sucess.jsp"/>
+            <forward name="failure" path="/"/>
+        </action>
+        <action parameter="action" input="/views/usuarios/usuarios-body.jsp" name="UsuariosActionFormBean" path="/usuarios" scope="session" type="com.vigia.struts.usuarios.UsuariosAction" validate="false">
+            <forward name="success" path="/views/usuarios/usuarios.jsp"/>
+            <forward name="failure" path="/views/usuarios/usuarios.jsp"/>
+            <forward name="buscar" path="/views/usuarios/usuarios.jsp" />
+            <forward name="eliminar" path="/views/usuarios/usuarios.jsp" redirect="true"/>
+            <forward name="crear" path="/views/usuarios/usuarios.jsp" redirect="true"/>
+        </action>  
+        <action input="/marcas-body.jsp" name="MarcasActionFormBean" path="/marcas" scope="session" type="com.vigia.struts.MarcasAction" validate="false">
+            <forward name="success" path="/marcas.jsp"/>
+            <forward name="failure" path="/marcas.jsp"/>
+        </action>
+        
+        <action  parameter="action" input="/views/clientes/clientes-body.jsp" name="ClientesActionFormBean" path="/clientes" scope="session" type="com.vigia.struts.clientes.ClientesAction" validate="false">
+            
+            <forward name="buscar" path="/views/clientes/clientes.jsp"/>
+            <forward name="crear" path="/views/clientes/clientes.jsp" redirect="true"/>
+            <forward name="eliminar" path="/views/clientes/clientes.jsp" redirect="true"/>
+            <forward name="editar" path="/views/clientes/clientes.jsp" redirect="true" />
+        </action>  
+        
+        <action  parameter="action" input="/views/empleados/empleados-body.jsp" name="EmpleadosActionFormBean" path="/empleados" scope="session" type="com.vigia.struts.empleados.EmpleadosAction" validate="false">
+            
+            <forward name="buscar" path="/views/empleados/empleados.jsp" />
+            <forward name="crear" path="/views/empleados/empleados.jsp" />
+            <forward name="eliminar" path="/views/empleados/empleados.jsp" />
+            <forward name="editar" path="/views/empleados/empleados.jsp" />
+        </action>         
+        
+        <action  parameter="action" input="/views/proveedores/proveedores-body.jsp" name="ProveedoresActionFormBean" path="/proveedores" scope="session" type="com.vigia.struts.proveedores.ProveedoresAction" validate="false">
+            
+            <forward name="buscar" path="/views/proveedores/proveedores.jsp" />
+            <forward name="crear" path="/views/proveedores/proveedores.jsp" />
+            <forward name="eliminar" path="/views/proveedores/proveedores.jsp" />
+            <forward name="editar" path="/views/proveedores/proveedores.jsp" />
+        </action>           
+        <action  parameter="action" input="/views/remitos/remitos-body.jsp" name="RemitosActionFormBean" path="/remitos" scope="session" type="com.vigia.struts.remitos.RemitosAction" validate="false">          
+            <forward name="buscar" path="/views/remitos/remitos.jsp" />
+            <forward name="crear" path="/views/remitos/remitos.jsp" />
+        </action>            
+                
+        <action path="/User" forward="/views/usuarios/user-form.jsp"/>
+        <action path="/Logout" forward="/views/usuarios/logout.jsp"/>
+        <action path="/Usuarios" forward="/views/usuarios/usuarios.jsp"/>
+        <action path="/Marcas" forward="/marcas.jsp"/>
+        <action path="/Clientes" forward="/clientes/clientes.jsp"/>
+        <action path="/Empleados" forward="/empleados/empleados.jsp"/>
+        <action path="/Proveedores" forward="/proveedores/proveedores.jsp"/>
+    </action-mappings>
+    
+    <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
+
+    <message-resources parameter="com/vigia/struts/ApplicationResource"/>    
+    
+    <!-- ========================= Tiles plugin ===============================-->
+    <!--
+    This plugin initialize Tiles definition factory. This later can takes some
+    parameters explained here after. The plugin first read parameters from
+    web.xml, thenoverload them with parameters defined here. All parameters
+    are optional.
+    The plugin should be declared in each struts-config file.
+    - definitions-config: (optional)
+    Specify configuration file names. There can be several comma
+    separated file names (default: ?? )
+    - moduleAware: (optional - struts1.1)
+    Specify if the Tiles definition factory is module aware. If true
+    (default), there will be one factory for each Struts module.
+    If false, there will be one common factory for all module. In this
+    later case, it is still needed to declare one plugin per module.
+    The factory will be initialized with parameters found in the first
+    initialized plugin (generally the one associated with the default
+    module).
+    true : One factory per module. (default)
+    false : one single shared factory for all modules
+    - definitions-parser-validate: (optional)
+    Specify if xml parser should validate the Tiles configuration file.
+    true : validate. DTD should be specified in file header (default)
+    false : no validation
+
+    Paths found in Tiles definitions are relative to the main context.
+    -->
+    <plug-in className="org.apache.struts.tiles.TilesPlugin" >
+        <set-property property="definitions-config" value="/WEB-INF/tiles-defs.xml" />      
+        <set-property property="moduleAware" value="true" />
+    </plug-in>
+    
+    <!-- ========================= Validator plugin ================================= -->
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+        <set-property
+            property="pathnames"
+            value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml"/>
+    </plug-in>
+  
+</struts-config>
